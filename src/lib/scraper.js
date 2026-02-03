@@ -3,8 +3,12 @@ import { chromium } from "playwright";
 let browserInstance = null;
 
 async function getBrowser() {
-  if (!browserInstance) {
-    browserInstance = await chromium.launch({ headless: true });
+  if (!browserInstance || !browserInstance.isConnected()) {
+    browserInstance = await chromium.launch({
+      headless: true,
+      handleSIGINT: false,
+      handleSIGTERM: false,
+    });
   }
   return browserInstance;
 }

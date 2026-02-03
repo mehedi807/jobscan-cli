@@ -40,14 +40,32 @@ export default function scanCommand(program) {
       const providerModule = getProvider(provider);
       const stats = { new: 0, total: 0 };
       const displayJobs = [];
+      let isInterrupted = false;
+
+      const onInterrupt = () => {
+        if (isInterrupted) {
+          process.exit(1);
+        }
+        isInterrupted = true;
+        console.log(chalk.yellow("\n\nStopping..."));
+      };
+
+      process.on("SIGINT", onInterrupt);
 
       try {
         for (const url of urls) {
+          if (isInterrupted) break;
+
           console.log(chalk.gray(`Scanning ${url}...`));
           const spinner = ora("").start();
 
           try {
             const text = await scrape(url);
+            if (isInterrupted) {
+              spinner.stop();
+              break;
+            }
+
             const jobs = await providerModule.parseJobs(apiKey, text, url);
 
             if (jobs.length === 0) {
@@ -74,10 +92,15 @@ export default function scanCommand(program) {
               displayJobs.push(...newJobs);
             }
           } catch (error) {
-            spinner.fail(error.message);
+            if (!isInterrupted) {
+              spinner.fail(error.message);
+            } else {
+              spinner.stop();
+            }
           }
         }
       } finally {
+        process.removeListener("SIGINT", onInterrupt);
         await closeBrowser();
       }
 

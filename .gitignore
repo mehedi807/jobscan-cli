@@ -1,0 +1,8 @@
+node_modules/
+.env
+*.log
+data/*.bk
+.jobscan/
+package-lock.json
+debug_output.txt
+debug_scan.js

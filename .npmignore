@@ -1,0 +1,4 @@
+data/*.bk
+debug_output.txt
+debug_scan.js
+.gitignore

@@ -1,6 +1,6 @@
 {
   "name": "jobscan-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "CLI tool to track job postings from career pages using LLM",
   "bin": {
     "jobscan": "./bin/cli.js"

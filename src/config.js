@@ -60,3 +60,9 @@ export function removeUrl(url) {
   }
   return false;
 }
+
+export function clearUrls() {
+  const config = getConfig() || { urls: [] };
+  config.urls = [];
+  saveConfig(config);
+}

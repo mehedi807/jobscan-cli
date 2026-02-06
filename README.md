@@ -53,6 +53,7 @@ List or remove tracked pages.
 ```bash
 $ jobscan urls
 $ jobscan remove https://careers.google.com/jobs
+$ jobscan remove --all # Clear all URLs
 ```
 
 ### History
@@ -66,15 +67,15 @@ $ jobscan list --company Robi
 
 ## CLI Reference
 
-| Command  | Alias       | Description               |
-| -------- | ----------- | ------------------------- |
-| `init`   |             | Configure API keys        |
-| `add`    |             | Add a new career page URL |
-| `scan`   | `(default)` | Scan pages for new jobs   |
-| `list`   |             | List all jobs in database |
-| `urls`   |             | List existing URLs        |
-| `remove` |             | Remove an existing URL    |
-| `clear`  |             | Reset database or config  |
+| Command  | Alias       | Description                           |
+| -------- | ----------- | ------------------------------------- |
+| `init`   |             | Configure API keys                    |
+| `add`    |             | Add a new career page URL             |
+| `scan`   | `(default)` | Scan pages for new jobs               |
+| `list`   |             | List all jobs in database             |
+| `urls`   |             | List existing URLs                    |
+| `remove` |             | Remove a URL or all URLs with `--all` |
+| `clear`  |             | Reset database or config              |
 
 ## Configuration
 
